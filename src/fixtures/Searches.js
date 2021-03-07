@@ -1,0 +1,1 @@
+export const SearchList = ['tiffany', 'aa', 'chai', 'tiffany']
