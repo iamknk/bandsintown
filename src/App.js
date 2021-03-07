@@ -14,6 +14,16 @@ function App() {
     
   }
 
+  const getEvents = async (name) => {
+    console.log(name)
+    const res = await fetch(`artists/${name}/events?` + new URLSearchParams({
+      app_id: 'bandsintown',
+  }))
+  const data = await res.json()
+  console.log(data)
+
+  }
+
   return (
     <div className="App">
       <SearchBar artistSearch={artistSearch} />
@@ -21,7 +31,7 @@ function App() {
           artists.map(artist => 
         <div className="container" key={artist.id}>
           <div className="row">
-            <ArtistCard key={artist.id} name={artist.name} image={artist.image_url} facebookUrl={artist.facebook_page_url} />
+            <ArtistCard key={artist.id} name={artist.name} image={artist.image_url} facebookUrl={artist.facebook_page_url} onClick={getEvents} />
           </div>
         </div>
         ) 
