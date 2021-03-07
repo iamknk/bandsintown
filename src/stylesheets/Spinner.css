@@ -1,0 +1,8 @@
+.center {
+    right: 50%;
+    bottom: 50%;
+    position: absolute;
+    width: 3rem; 
+    height: 3rem;
+    color: #00B4B3;
+}
