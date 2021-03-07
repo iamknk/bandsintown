@@ -1,14 +1,29 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import { SearchBar, ArtistCard, Events, Spinner } from './components/index'
+import { 
+  SearchBar, 
+  ArtistCard, 
+  Events, 
+  Spinner, 
+  RecentSearches 
+} from './components/index'
 
+import { getRecentSearches } from './helpers/SearchHelper'
+
+const recentSearches = JSON.parse(localStorage.getItem('searches') || '[]')
 function App() {
   const [artists, setArtists] = useState([])
-  const [searchLoading, setSearchLoading] = useState(false)
+  const [searches, setSearches] = useState(recentSearches)
+  const [searcheLoading, setSearchLoading] = useState(false)
   const [noResults, setNoResults] = useState(false)
 
+  useEffect(() => {
+    localStorage.setItem("searches", JSON.stringify(searches))
+  }, [searches])
+
   const artistSearch = async (term) => {
+    setSearches([...searches, term])
     setSearchLoading(true)
     const res = await fetch(`artists/${term}?` + new URLSearchParams({
       app_id: 'bandsintown',
@@ -26,14 +41,6 @@ function App() {
   
   }
 
-  const getEvents = async (name) => {
-    const res = await fetch(`artists/${name}/events?` + new URLSearchParams({
-      app_id: 'bandsintown',
-  }))
-  const data = await res.json()
-  console.log(data)
-
-  }
   return (
     <BrowserRouter>
       <div className="container">
@@ -43,13 +50,14 @@ function App() {
           render={() => (
             <>
               <SearchBar artistSearch={artistSearch} />
-              { searchLoading ? <Spinner />  : <> { noResults ? <div className="text-center mt-5 pt-5">
+              <RecentSearches searches={getRecentSearches(searches)} onChipClick={(text) => artistSearch(text)} />
+              { searcheLoading ? <Spinner />  : <> { noResults ? <div className="text-center mt-5 pt-5">
                  <h2>We couldn't find this band. Search again!</h2>
               </div> : <> {artists.length > 0 ? 
                 artists.map(artist => 
-              <div className="container">
+              <div className="container" key={artist.id}>
                 <div className="row">
-                  <ArtistCard key={artist.id} name={artist.name} image={artist.image_url} facebookUrl={artist.facebook_page_url} viewEvent={true} onClick={getEvents} />
+                  <ArtistCard name={artist.name} image={artist.image_url} facebookUrl={artist.facebook_page_url} viewEvent={true} />
                 </div>
               </div>
               ) 
