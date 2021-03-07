@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+
+import { SearchBar } from './components/index'
 
 function App() {
+  const [artists, setArtists] = useState([])
+
+  const artistSearch = async (term) => {
+    const res = await fetch(`artists/${term}?` + new URLSearchParams({
+      app_id: 'bandsintown',
+    }))
+    const data = await res.json()
+    setArtists([data])
+    
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SearchBar artistSearch={artistSearch} />
     </div>
   );
 }
