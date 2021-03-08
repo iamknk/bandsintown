@@ -19,6 +19,8 @@ This repo is a [simple React app](https://bandsintownkashif.herokuapp.com/) whic
 * Bootstrap
 * Moment for datetime
 * Jest/Enzyme for Unit Testing
+* Git for version management
+* VScode as code editor
 
 ## UI
 * Used simple HTML, CSS, Bootstrap and React
