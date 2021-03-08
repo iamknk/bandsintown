@@ -25,7 +25,7 @@ function App() {
   const artistSearch = async (term) => {
     setSearches([...searches, term])
     setSearchLoading(true)
-    const res = await fetch(`artists/${term}?` + new URLSearchParams({
+    const res = await fetch(`https://rest.bandsintown.com/artists/${term}?` + new URLSearchParams({
       app_id: 'bandsintown',
     }))
     const data = await res.json()
