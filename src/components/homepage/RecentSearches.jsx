@@ -7,7 +7,7 @@ export const RecentSearches = ({ searches, onChipClick }) => {
         <div class="card mb-5">
             <div class="card-header">
                 <strong>Recent Searches : </strong>
-                {searches.length > 0 ? searches.map(text => <TextChip key={text} text={text} onClick={onChipClick} />) : <></>}
+                {searches.length > 0 ? searches.map((text, index) => <TextChip key={index} text={text} onClick={onChipClick} />) : <></>}
             </div>
         </div>
     )
