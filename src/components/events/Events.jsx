@@ -12,7 +12,7 @@ export const Events = ({ location : {state : {artist, image, facebookUrl }} }) =
 
     useEffect(() => {
         const getEvents = async (name) => {
-            const res = await fetch(`artists/${artist}/events?` + new URLSearchParams({
+            const res = await fetch(`https://rest.bandsintown.com/artists/${artist}/events?` + new URLSearchParams({
                 app_id: 'bandsintown',
             }))
             const data = await res.json()
