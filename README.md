@@ -12,6 +12,7 @@ This repo is a [simple React app](https://bandsintownkashif.herokuapp.com/) whic
 * ```npm start```
 
 ## How to Run Tests
+Simple unit tests are performed for all indivisual components using Jest/Enzyme.
 * After succesfully running ```npm start```, open new terminal in same folder and run ```npm test``` to run all tests.
 
 ## Tools Used
