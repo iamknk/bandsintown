@@ -22,6 +22,7 @@ Simple unit tests are performed for all indivisual components using Jest/Enzyme.
 * Jest/Enzyme for Unit Testing
 * Git for version management
 * VScode as code editor
+* Postman for API testing
 
 ## UI
 * Used simple HTML, CSS, Bootstrap and React
